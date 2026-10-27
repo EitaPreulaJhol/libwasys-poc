@@ -79,9 +79,9 @@ Run `WasysProcKiller.exe` as administrator. The manifest requests elevation, so 
 
 If the driver is already loaded when the tool starts, it attaches to the existing device and does not create or remove a service. If a `WasysLab` service exists but points somewhere else, the tool refuses to touch it.
 
-The admin prompt is for the drivcer installation. The bug itself does not need admin: once the driver is loaded, any local user can open `\\.\WasysControl`. This GUI always elevates because it may have to create the service.
+The admin prompt is for the driver installation. The bug itself does not need admin: once the driver is loaded, any local user can open `\\.\WasysControl`. This GUI always elevates because it may have to create the service.
 
-Killing `csrss.exe`, `smss.exe`, `wininit.exe`, `services.exe`, or `lsass.exe` will bugcheck the machine. Test in a VM.
+Killing `csrss.exe`, `smss.exe`, `wininit.exe`, `services.exe`, or `lsass.exe` will bugcheck the machine. Test in a VM or an controlled environment.
 
 If you kill the tool after it installed the driver, the `WasysLab` service and `wasyslab.sys` remain. Remove them with:
 
@@ -108,7 +108,7 @@ The file may stay locked until the next reboot.
 
 ## Scope
 
-Only the termination path is implemented. The driver also exposes raw physical disk reads (`0x22E000`), deletion of locked files (`0x22E004`), registry writes (`0x22E008`), and port I/O (`0x22E010` and `0x22E014`). This tool does not use them.
+Only the termination path is implemented. The driver also exposes raw physical disk reads (`0x22E000`), deletion of locked files (`0x22E004`), registry writes (`0x22E008`), and port I/O (`0x22E010` and `0x22E014`).
 
 ## Detection notes
 
